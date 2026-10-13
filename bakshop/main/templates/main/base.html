@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}BakShop — магазин автозапчастей{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/main_style.css' %}">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+
+      <a href="/" class="logo">
+        <div class="logo__mark">B</div>
+        <div class="logo__name">Bak<span>Shop</span></div>
+      </a>
+
+      <nav class="nav">
+        <a href="/" class="nav__link">Главная</a>
+        <a href="/#contacts" class="nav__link">Контакты</a>
+
+        <div class="dropdown">
+          <a href="#" class="nav__link nav__link--main">
+            {% if user.is_authenticated %}{{ user.username }}{% else %}Аккаунт{% endif %} ▾
+          </a>
+          <div class="dropdown__menu">
+            {% if user.is_authenticated %}
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="dropdown__btn">Выйти</button>
+              </form>
+            {% else %}
+              <a href="{% url 'login' %}">Войти</a>
+              <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+            <a href="/admin/" class="admin-link">Вход для администратора</a>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer class="footer" id="contacts">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <h2>BakShop</h2>
+          <p>Запчасти для автомобилей разных марок. Подберём деталь по марке, модели и году выпуска.</p>
+        </div>
+        <div>
+          <h2>Контакты</h2>
+          <p>Телефон: <a href="tel:+996706223086">+996 706 22 30 86</a></p>
+          <p>WhatsApp: <a href="https://wa.me/996706223086">написать</a></p>
+          <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
+        </div>
+        <div>
+          <h2>Адрес</h2>
+          <p>обл. Иссык-Куль, с. Кожояр-Ата</p>
+          <p>Пн–Сб: 9:00–18:00</p>
+          <p>Вс: выходной</p>
+        </div>
+      </div>
+      <div class="footer__copy">© 2026 BakShop. Все права защищены.</div>
+    </div>
+  </footer>
+
+</body>
+</html>

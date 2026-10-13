@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+
+{% block title %}Вход — BakShop{% endblock %}
+
+{% block content %}
+<main class="container">
+  <div class="auth">
+    <h1>Вход</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn--wide">Войти</button>
+    </form>
+    <p class="auth__alt">Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+  </div>
+</main>
+{% endblock %}
