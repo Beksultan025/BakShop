@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+
+{% block title %}Панель администратора — BakShop{% endblock %}
+
+{% block content %}
+<main class="container">
+  <div class="panel-head">
+    <h1>Панель администратора</h1>
+    <span class="panel-user">{{ user.username }}</span>
+  </div>
+
+  {% with page=request.resolver_match.url_name %}
+  <nav class="panel-tabs">
+    <a href="{% url 'panel_dashboard' %}" class="{% if page == 'panel_dashboard' %}active{% endif %}">Обзор</a>
+    <a href="{% url 'panel_list' %}" class="{% if page == 'panel_list' or page == 'panel_edit' or page == 'panel_delete' %}active{% endif %}">Товары</a>
+    <a href="{% url 'panel_add' %}" class="{% if page == 'panel_add' %}active{% endif %}">Добавить товар</a>
+    <a href="{% url 'panel_analytics' %}" class="{% if page == 'panel_analytics' %}active{% endif %}">Аналитика</a>
+  </nav>
+  {% endwith %}
+
+  {% block panel %}{% endblock %}
+</main>
+{% endblock %}

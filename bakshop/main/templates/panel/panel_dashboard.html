@@ -1,0 +1,31 @@
+{% extends "panel/panel_base.html" %}
+
+{% block panel %}
+<div class="stats">
+  <div class="stat"><span class="stat__num">{{ total }}</span><span class="stat__label">Всего товаров</span></div>
+  <div class="stat"><span class="stat__num">{{ in_stock }}</span><span class="stat__label">В наличии</span></div>
+  <div class="stat"><span class="stat__num">{{ out_stock }}</span><span class="stat__label">Нет в наличии</span></div>
+  <div class="stat"><span class="stat__num">{{ users }}</span><span class="stat__label">Пользователей</span></div>
+</div>
+
+<h2 class="panel-sub">Последние добавленные</h2>
+<div class="table-wrap">
+  <table class="table">
+    <thead>
+      <tr><th>Название</th><th>Бренд</th><th>Цена</th><th>Наличие</th></tr>
+    </thead>
+    <tbody>
+      {% for p in latest %}
+      <tr>
+        <td><strong>{{ p.name }}</strong></td>
+        <td>{{ p.brand }}</td>
+        <td>{{ p.price|floatformat:0 }} сом</td>
+        <td>{% if p.in_stock %}Есть{% else %}Нет{% endif %}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4">Товаров пока нет.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "pabel/panel_base.html" %}
+
+{% block panel %}
+<h2 class="panel-sub">Аналитика</h2>
+
+<div class="todo-grid">
+  <div class="todo-card">
+    <span class="todo-card__badge">В разработке</span>
+    <h3>Цены</h3>
+    <p>Минимальная, средняя и максимальная цена.</p>
+  </div>
+  <div class="todo-card">
+    <span class="todo-card__badge">В разработке</span>
+    <h3>Популярные бренды</h3>
+    <p>Бренды по числу товаров.</p>
+  </div>
+  <div class="todo-card">
+    <span class="todo-card__badge">В разработке</span>
+    <h3>Новые товары по месяцам</h3>
+    <p>График добавления товаров.</p>
+  </div>
+</div>
+
+{# TODO: посчитай данные в panel_analytics (views.py), передай через context и замени заглушки #}
+{% endblock %}

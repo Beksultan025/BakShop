@@ -25,6 +25,10 @@
           <a href="#" class="nav__link nav__link--main">
             {% if user.is_authenticated %}{{ user.username }}{% else %}Аккаунт{% endif %} ▾
           </a>
+            {% if user.is_staff %}
+          <a href="{% url 'panel_dashboard' %}">Панель администратора</a>
+            {% endif %}
+
           <div class="dropdown__menu">
             {% if user.is_authenticated %}
               <form method="post" action="{% url 'logout' %}">
@@ -35,7 +39,6 @@
               <a href="{% url 'login' %}">Войти</a>
               <a href="{% url 'register' %}">Регистрация</a>
             {% endif %}
-            <a href="/admin/" class="admin-link">Вход для администратора</a>
           </div>
         </div>
       </nav>
