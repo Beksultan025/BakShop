@@ -1,0 +1,43 @@
+{% extends "main/base.html" %}
+
+{% block title %}Корзина — BakShop{% endblock %}
+
+{% block content %}
+<main class="container">
+  <div class="section-head">
+    <h1>Корзина</h1>
+  </div>
+
+  {% if items %}
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr><th>Товар</th><th>Цена</th><th>Кол-во</th><th>Сумма</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td><strong>{{ item.product.name }}</strong><br><small>{{ item.product.brand }}</small></td>
+          <td>{{ item.product.price|floatformat:0 }} сом</td>
+          <td>{{ item.qty }}</td>
+          <td>{{ item.subtotal|floatformat:0 }} сом</td>
+          <td>
+            <form method="post" action="{% url 'cart_remove' item.product.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="link-delete cart-remove">Убрать</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cart-total">
+    <span>Итого: <strong>{{ total|floatformat:0 }} сом</strong></span>
+  </div>
+  {% else %}
+  <p class="cart-empty">В корзине пока пусто. <a href="{% url 'index' %}">Перейти к товарам</a></p>
+  {% endif %}
+</main>
+{% endblock %}

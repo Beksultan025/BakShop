@@ -6,7 +6,6 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/register/", views.register, name="register"),
     path("social/", include("allauth.urls")),
@@ -19,4 +18,9 @@ urlpatterns = [
     path("panel/<int:pk>/edit/", views.panel_edit, name="panel_edit"),
     path("panel/<int:pk>/delete/", views.panel_delete, name="panel_delete"),
     path("panel/analytics/", views.panel_analytics, name="panel_analytics"),
+    path("cart/", views.cart_detail, name="cart_detail"),
+    path("cart/add/<int:pk>/", views.cart_add, name="cart_add"),
+    path("cart/remove/<int:pk>/", views.cart_remove, name="cart_remove"),
+    path("buy/<int:pk>/", views.buy, name="buy"),
+    path("buy/success/", views.buy_success, name="buy_success"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

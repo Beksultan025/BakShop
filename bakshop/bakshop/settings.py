@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'spares',
 ]
 
 MIDDLEWARE = [
@@ -160,9 +162,11 @@ SOCIALACCOUNT_PROVIDERS = {
             "prompt": "select_account",
         },
         "APP": {
-            "client_id": os.environ.get("GOOGLE_CLIENT_ID", ""),
-            "secret": os.environ.get("GOOGLE_CLIENT_SECRET", ""),
+            "client_id": os.getenv("GOOGLE_CLIENT_ID") ,
+            "secret": os.getenv("GOOGLE_CLIENT_SECRET"),
             "key": "",
         },
     }
 }
+
+print("CLIENT_ID =", SOCIALACCOUNT_PROVIDERS["google"]["APP"]["client_id"])

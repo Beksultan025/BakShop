@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+
+{% block title %}Заказ отправлен — BakShop{% endblock %}
+
+{% block content %}
+<main class="container">
+  <div class="auth buy__done">
+    <div class="buy__check">✓</div>
+    <h1>Заказ отправлен!</h1>
+    <p>Спасибо! Мы скоро свяжемся с вами по указанному телефону.</p>
+    <a href="{% url 'index' %}" class="btn btn--wide">На главную</a>
+  </div>
+</main>
+{% endblock %}

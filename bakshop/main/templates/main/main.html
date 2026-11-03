@@ -12,27 +12,30 @@
 
   <section class="grid">
     {% for p in products %}
-      <article class="card">
-        <div class="card__photo">
-          {% if p.badge %}<span class="badge">{{ p.badge }}</span>{% endif %}
-          {% if p.photo %}
-            <img src="{{ p.photo.url }}" alt="{{ p.name }}">
-          {% else %}
-            Нет фото
-          {% endif %}
+    <article class="card">
+      <div class="card__photo">
+        {% if p.badge %}<span class="badge">{{ p.badge }}</span>{% endif %}
+        {% if p.photo %}
+        <img src="{{ p.photo.url }}" alt="{{ p.name }}">
+        {% else %}
+        Нет фото
+        {% endif %}
+      </div>
+      <div class="card__body">
+        <span class="card__brand">{{ p.brand }}</span>
+        <h3 class="card__title">{{ p.name }}</h3>
+        <span class="card__car">{{ p.car }}</span>
+        <div class="card__footer">
+          <div class="price">{{ p.price|floatformat:0 }} <small>сом</small></div>
+          <form method="post" action="{% url 'cart_add' p.pk %}">
+            {% csrf_token %}
+            <a href="{% url 'buy' p.pk %}" class="btn">Купить</a>
+          </form>
         </div>
-        <div class="card__body">
-          <span class="card__brand">{{ p.brand }}</span>
-          <h3 class="card__title">{{ p.name }}</h3>
-          <span class="card__car">{{ p.car }}</span>
-          <div class="card__footer">
-            <div class="price">{{ p.price|floatformat:0 }} <small>сом</small></div>
-            <button class="btn">В корзину</button>
-          </div>
-        </div>
-      </article>
+      </div>
+    </article>
     {% empty %}
-      <p>Товаров не найдено.</p>
+    <p>Товаров не найдено.</p>
     {% endfor %}
   </section>
 </main>

@@ -1,0 +1,45 @@
+{% extends "main/base.html" %}
+
+{% block title %}Покупка — {{ product.name }}{% endblock %}
+
+{% block content %}
+<main class="container">
+  <div class="section-head">
+    <h1>Оформление заказа</h1>
+  </div>
+
+  <div class="buy">
+    <div class="buy__product">
+      <div class="buy__photo">
+        {% if product.photo %}
+          <img src="{{ product.photo.url }}" alt="{{ product.name }}">
+        {% else %}
+          Нет фото
+        {% endif %}
+      </div>
+      <div class="buy__info">
+        <span class="card__brand">{{ product.brand }}</span>
+        <h2>{{ product.name }}</h2>
+        <span class="card__car">{{ product.car }}</span>
+        <div class="price">{{ product.price|floatformat:0 }} <small>сом</small></div>
+      </div>
+    </div>
+
+    <div class="auth buy__form">
+      <h2>Ваши данные</h2>
+      <p class="buy__hint">Мы перезвоним, уточним детали и договоримся о получении.</p>
+
+      {% if error %}
+        <p class="buy__error">Не удалось отправить заказ. Попробуйте ещё раз или позвоните нам.</p>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn--wide">Отправить заказ</button>
+      </form>
+      <p class="auth__alt"><a href="{% url 'index' %}">← Вернуться к товарам</a></p>
+    </div>
+  </div>
+</main>
+{% endblock %}
